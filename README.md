@@ -125,6 +125,22 @@ rational-function-hub/
 - **Math.js**: Mathematical expression parsing
 - **Web3Forms**: Contact form functionality
 
+## 📱 Screenshots
+
+<img width="1866" height="923" alt="image" src="https://github.com/user-attachments/assets/bd78fd66-06f7-4119-a319-f2f01def2c88" />
+
+<img width="1864" height="923" alt="image" src="https://github.com/user-attachments/assets/29bbb4e2-d4d0-4b2f-918e-ccf763d858e9" />
+
+<img width="1865" height="924" alt="image" src="https://github.com/user-attachments/assets/67ab37b0-a8b1-4b3e-ae9f-59ccc63c5230" />
+
+<img width="1864" height="924" alt="image" src="https://github.com/user-attachments/assets/c84b2ed4-4b4e-401e-b8fe-1bcdbf8f7a06" />
+
+<img width="1867" height="923" alt="image" src="https://github.com/user-attachments/assets/745435ea-48f3-4244-a79e-814df4478611" />
+
+<img width="1865" height="922" alt="image" src="https://github.com/user-attachments/assets/773fe46d-887a-4e5c-90ee-0f11976bcf7e" />
+
+<img width="1864" height="919" alt="image" src="https://github.com/user-attachments/assets/90e78210-c9d7-4d07-8e07-3962f3a3e94a" />
+
 ## 👨‍💻 Creator
 
 **Liel Darren Fajutagana**
