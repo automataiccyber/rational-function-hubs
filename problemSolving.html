@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Problem Solving</title>
+    <link rel="stylesheet" href="css/problemSolving.css">
+</head>
+<body>
+
+    <!-- Header -->
+    <header>
+        <div class="header-container">
+            <img src="images/logo.jpg" alt="Logo" class="logo">
+            <span>Rational Function Hub</span>
+            <img src="images/logo.jpg" alt="Logo" class="logo">
+        </div>
+    </header>
+
+    <!-- Navigation bar -->
+    <nav>
+        <ul>
+            <li><a href="firstPage.html">Home</a></li>
+            <li><a href="secondPage.html">Concepts</a></li>
+            <li><a href="thirdPage.html">Graphing</a></li>
+            <li><a href="fourthPage.html" class="active">Practice</a></li>
+            <li><a href="fifthPage.html">Resources</a></li>
+            <li><a href="sixthPage.html">About</a></li>
+            <li><a href="seventhPage.html">Contact</a></li>
+        </ul>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="content">
+        <main>
+            <div class="section">
+                <!-- Title Section -->
+                <div class="title-container">
+                    <h1>Problem Solving</h1>
+                </div>
+
+                <!-- Problem Section -->
+                <div class="problem-container">
+                    <div class="problem-input-container">
+                        <h3 id="problem"></h3>
+                        <input type="text" id="answer" placeholder="Enter your answer here">
+                        <button id="submit">Submit</button>
+                    </div>
+                    <div id="response"></div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="social-media">
+                <div class="social-item">
+                    <a href="https://www.facebook.com/profile.php?id=61570026398234" target="_blank">
+                        <img src="images/facebookIcon.jpg" alt="Facebook">
+                    </a>
+                    <a href="https://www.facebook.com/profile.php?id=61570026398234" target="_blank" class="social-link">Rational Function Hub</a>
+                </div>
+                <div class="social-item">
+                    <a href="https://www.youtube.com/channel/UCffQ2qR7cDcPf9IzZFQeyAQ" target="_blank">
+                        <img src="images/youtubeIcon.jpg" alt="YouTube">
+                    </a>
+                    <a href="https://www.youtube.com/channel/UCffQ2qR7cDcPf9IzZFQeyAQ" target="_blank" class="social-link">Rational_FH_111</a>
+                </div>
+                <div class="social-item">
+                    <a href="https://www.instagram.com/rationalfh111/" target="_blank">
+                        <img src="images/instagramIcon.jpg" alt="Instagram">
+                    </a>
+                    <a href="https://www.instagram.com/rationalfh111/" target="_blank" class="social-link">rationalfh111</a>
+                </div>
+                <div class="social-item">
+                    <a href="https://x.com/RationalFH111" target="_blank">
+                        <img src="images/xIcon.jpg" alt="X">
+                    </a>
+                    <a href="https://x.com/RationalFH111" target="_blank" class="social-link">RationalFH111</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Array of real-life problems related to rational functions
+        const problems = [
+        {
+            problem: "A car's fuel efficiency is modeled by the rational function f(x) = 30 / (x + 2), where x is the speed of the car in miles per hour. What is the fuel efficiency when the car is traveling at 50 mph?",
+            solution: {
+                notnormal: ".58",
+                normal: "0.58",
+                numeric: "0.577",
+                withUnit: "0.577 miles per gallon",
+                completeSolution: "f(x) = 30 / (x + 2). x = 50, we get f(50) = 30 / (50 + 2) = 30 / 52 ≈ 0.577 miles per gallon."
+            },
+        },
+        {
+            problem: "A business has a revenue model represented by R(x) = (100x) / (x + 10), where x is the number of products sold. What is the revenue when 50 products are sold?",
+            solution: {
+                notnormal: "83",
+                normal: "83.00",
+                numeric: "83.33",
+                withUnit: "83.33",
+                completeSolution: "R(x) = (100x) / (x + 10). x = 50, we get R(50) = (100 * 50) / (50 + 10) = 5000 / 60 ≈ 83.33."
+            },
+        },
+        {
+            problem: "The area of a garden is modeled by the function A(x) = (10x) / (x + 4), where x is the length of one side in meters. What is the area when the length of the side is 8 meters?",
+            solution: {
+                notnormal: "7",
+                normal: "7.00",
+                numeric: "6.67",
+                withUnit: "6.67 square meters",
+                completeSolution: "A(x) = (10x) / (x + 4). x = 8, we get A(8) = (10 * 8) / (8 + 4) = 80 / 12 ≈ 6.67 square meters."
+            },
+        },
+        {
+            problem: "The speed of a car approaching a traffic light is modeled by the function f(t) = 60 / (t + 3), where t is the time in seconds before the car reaches the light. What is the speed when the car is 5 seconds from the light?",
+            solution: {
+                notnormal: "8",
+                normal: "7.5",
+                numeric: "7.50",
+                withUnit: "7.50 miles per hour",
+                completeSolution: "f(t) = 60 / (t + 3). t = 5, we get f(5) = 60 / (5 + 3) = 60 / 8 = 7.50 miles per hour."
+            },
+        },
+        {
+            problem: "A rectangular field has a fixed length of 50 meters, but its width can vary. The area of the field is modeled by the function A(w) = 50 / w, where w represents the width in meters. If the area of the field is 10 square meters, calculate the width of the field. Provide your answer in meters.",
+        solution: {
+            notnormal: "5",
+            normal: "5.0",
+            numeric: "5.00",
+            withUnit: "5 meters",
+            completeSolution: "A(w) = 50 / w. Solving for w gives w = 50 / 10 = 5 meters."
+            },
+        },
+        {
+            problem: "The intensity of light emitted from a point source decreases with distance according to the function I(x) = 100 / (x^2 + 1), where x represents the distance in meters from the source. Calculate the light intensity at a distance of 4 meters. Round your answer to two decimal places.",
+        solution: {
+            notnormal: "6",
+            normal: "6.00",
+            numeric: "5.88",
+            withUnit: "5.88 units",
+            completeSolution: "I(4) = 100 / (4^2 + 1) = 100 / (16 + 1) = 100 / 17 ≈ 5.88 units."
+            },
+        },
+        {
+            problem: "In an electrical circuit, the resistance R(x) is modeled by the rational function R(x) = 1 / (x + 5), where x represents the additional load in ohms. Find the total resistance when the additional load in the circuit is 15 ohms. Express your answer in ohms.",
+            solution: {
+            notnormal: ".05",
+            normal: "0.05",
+            numeric: "0.05",
+            withUnit: "0.05 ohms",
+            completeSolution: "R(15) = 1 / (15 + 5) = 1 / 20 = 0.05 ohms."
+            },
+        },
+        {
+            problem: "The cost of electricity consumption is modeled by the function C(k) = (30k) / (k + 3), where k is the number of kilowatt-hours used. What is the cost for 20 kWh?",
+            solution: {
+                notnormal: "26",
+                normal: "26.00",
+                numeric: "26.09",
+                withUnit: "26.09",
+                completeSolution: "C(k) = 30k / (k + 3). k = 20, we get C(20) = (30 * 20) / (20 + 3) = 600 / 23 ≈ 26.09."
+            },
+        },
+        {
+            problem: "A factory uses x machines to produce goods, and the production rate R(x) is given by R(x) = 200x / (x + 10), where x is the number of machines in operation. If 40 machines are operating, calculate the factory’s output rate. Express your answer in units per hour.",
+            solution: {
+            notnormal: "160",
+            normal: "160.0",
+            numeric: "160.00",
+            withUnit: "160 units/hour",
+            completeSolution: "R(40) = 200 * 40 / (40 + 10) = 8000 / 50 = 160 units/hour."
+            },
+        },
+        {
+            problem: "A company’s production cost per unit is modeled by the function C(x) = 2000 / (x + 20), where x is the number of units produced. As the production volume increases, the cost per unit decreases due to economies of scale. Calculate the cost per unit when the company produces 80 units.",
+        solution: {
+            notnormal: "20",
+            normal: "20.00",
+            numeric: "20",
+            withUnit: "$20 per unit",
+            completeSolution: "C(80) = 2000 / (80 + 20) = 2000 / 100 = $20 per unit."
+            },
+        },
+        {
+            problem: "The amount of a drug remaining in a person’s body is modeled by A(t) = (100) / (t + 8), where t is time in hours. How much of the drug remains after 12 hours?",
+            solution: {
+                notnormal: "5",
+                normal: "5.0",
+                numeric: "5.00",
+                withUnit: "5.00 mg",
+                completeSolution: "A(t) = 100 / (t + 8). t = 12, we get A(12) = 100 / (12 + 8) = 100 / 20 = 5.00 mg."
+            },
+        },
+        {
+        problem: "The time T(x) required to complete a task is inversely proportional to the number of workers and is modeled by T(x) = 40 / x, where x represents the number of workers. Determine how long it will take to complete the task with 8 workers. Provide your answer in hours.",
+        solution: {
+            notnormal: "5",
+            normal: "5.00",
+            numeric: "5",
+            withUnit: "5 hours",
+            completeSolution: "T(8) = 40 / 8 = 5 hours."
+        }
+    },
+    {
+        problem: "The speed of a wave in shallow water depends on the depth of the water and is modeled by the function V(h) = 9.8 / sqrt(h), where h is the depth in meters. Calculate the speed of the wave in water that is 4 meters deep. Express your answer to one decimal place.",
+        solution: {
+            notnormal: "5",
+            normal: "5.00",
+            numeric: "4.9",
+            withUnit: "4.9 m/s",
+            completeSolution: "V(4) = 9.8 / sqrt(4) = 9.8 / 2 = 4.9 m/s."
+        }
+    },
+    {
+        problem: "A camera’s shutter speed depends on the aperture setting and is modeled by the function S(x) = 1 / (1 + x), where x is the aperture value. Find the shutter speed when the aperture value is set to 3. Express your answer in seconds.",
+        solution: {
+            notnormal: "0.3",
+            normal: ".25",
+            numeric: "0.25",
+            withUnit: "0.25 seconds",
+            completeSolution: "S(3) = 1 / (1 + 3) = 1 / 4 = 0.25 seconds."
+        }
+    },
+    {
+        problem: "A company’s pricing strategy involves lowering the price per unit as the number of units purchased increases. The price P(x) per unit is modeled by P(x) = 1000 / (x + 50), where x is the number of units purchased. Determine the price per unit when 450 units are purchased.",
+        solution: {
+            notnormal: "2",
+            normal: "2.00",
+            numeric: "2",
+            withUnit: "$2 per unit",
+            completeSolution: "P(450) = 1000 / (450 + 50) = 1000 / 500 = $2 per unit."
+        }
+    }
+    ];
+    
+        // Function to get random problem
+        function getRandomProblem() {
+            const shuffled = problems.sort(() => 0.5 - Math.random());
+            return shuffled[0];
+        }
+        
+        // Display random problem on page load
+        window.onload = function() {
+            const problemObj = getRandomProblem();
+            document.getElementById("problem").innerText = problemObj.problem;
+    
+            document.getElementById("submit").onclick = function() {
+                const userAnswer = document.getElementById("answer").value.trim();
+    
+                // Check if the input field is empty
+                if (!userAnswer) {
+                    alert("Please enter an answer before submitting.");
+                    return; // Stop further execution
+                }
+    
+                // Check if the answer matches any of the possible correct answers
+                const isCorrect = userAnswer === problemObj.solution.notnormal ||
+                                  userAnswer === problemObj.solution.normal || 
+                                  userAnswer === problemObj.solution.numeric || 
+                                  userAnswer === problemObj.solution.withUnit || 
+                                  userAnswer === problemObj.solution.completeSolution;
+    
+                const responseText = isCorrect ? "Correct! Good job." : `Incorrect. The correct answer is: ${problemObj.solution.completeSolution}`;
+    
+                // Replace submit button with response
+                const submitButton = document.getElementById("submit");
+                submitButton.style.visibility = 'hidden'; // Hide submit button
+                submitButton.style.padding = '16.5px';
+                const responseDiv = document.getElementById("response");
+                responseDiv.innerText = responseText; // Show the response message
+            };
+        }
+    </script>
+</body>
+</html>

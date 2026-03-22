@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Graphing</title>
+    <link rel="stylesheet" href="css/thirdPage.css">
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/11.7.3/math.min.js"></script>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="header-container">
+            <img src="images/logo.jpg" alt="Logo" class="logo">
+            <span>Rational Function Hub</span>
+            <img src="images/logo.jpg" alt="Logo" class="logo">
+        </div>
+    </header>
+    <!-- Navigation bar -->
+    <nav>
+        <ul>
+            <li><a href="firstPage.html">Home</a></li>
+            <li><a href="secondPage.html">Concepts</a></li>
+            <li><a href="thirdPage.html" class="active">Graphing</a></li>
+            <li><a href="fourthPage.html">Practice</a></li>
+            <li><a href="fifthPage.html">Resources</a></li>
+            <li><a href="sixthPage.html">About</a></li>
+            <li><a href="seventhPage.html">Contact</a></li>
+        </ul>
+    </nav>
+
+    <!-- Main content: Two sections -->
+    <main>
+        <!-- Left side: Calculator, Steps, Real-life Usage -->
+        <section class="calculator-section">
+            <!-- Calculator -->
+            <div class="calculator">
+                <h2>Rational Function Calculator</h2>
+                <div class="graphing">
+                        <label for="numerator">Numerator:</label>
+                        <input type="text" id="numerator" value="" placeholder="x^2-2x-1">
+                        <label for="denominator">Denominator:</label>
+                        <input type="text" id="denominator" value="" placeholder="x+1">
+                        <button onclick="plotGraph()">Solve</button>
+                </div>
+            </div>
+    
+            <!-- Step-by-Step Explanation -->
+            <div class="step-by-step">
+                <h2>Step-by-Step Process:</h2>
+                <div class="step" id="factoringStep"></div>
+                <div class="step" id="asymptotesStep"></div>
+                <div class="step" id="rootsStep"></div>
+            </div>
+    
+            <!-- Real-Life Usage -->
+            <div class="real-life-usage">
+                <h2>Real-life Application:</h2>
+                <p id="usageDescription"></p>
+            </div>
+        </section>
+    
+        <!-- Right side: Graph -->
+        <section class="graph-section">
+            <div id="graph"></div>
+        </section>
+    </main>
+    
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="social-media">
+                <div class="social-item">
+                    <a href="https://www.facebook.com/profile.php?id=61570026398234" target="_blank">
+                        <img src="images/facebookIcon.jpg" alt="Facebook">
+                    </a>
+                    <a href="https://www.facebook.com/profile.php?id=61570026398234" target="_blank" class="social-link">Rational Function Hub</a>
+                </div>
+                <div class="social-item">
+                    <a href="https://www.youtube.com/channel/UCffQ2qR7cDcPf9IzZFQeyAQ" target="_blank">
+                        <img src="images/youtubeIcon.jpg" alt="YouTube">
+                    </a>
+                    <a href="https://www.youtube.com/channel/UCffQ2qR7cDcPf9IzZFQeyAQ" target="_blank" class="social-link">Rational_FH_111</a>
+                </div>
+                <div class="social-item">
+                    <a href="https://www.instagram.com/rationalfh111/" target="_blank">
+                        <img src="images/instagramIcon.jpg" alt="Instagram">
+                    </a>
+                    <a href="https://www.instagram.com/rationalfh111/" target="_blank" class="social-link">rationalfh111</a>
+                </div>
+                <div class="social-item">
+                    <a href="https://x.com/RationalFH111" target="_blank">
+                        <img src="images/xIcon.jpg" alt="X">
+                    </a>
+                    <a href="https://x.com/RationalFH111" target="_blank" class="social-link">RationalFH111</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+       function normalizeInput(input) {
+    return input
+        .replace(/\s+/g, '') // Remove spaces
+        .replace(/(\d)([a-zA-Z])/g, '$1 * $2') // Ensure multiplication between numbers and variables
+        .replace(/([a-zA-Z])(\d)/g, '$1 * $2') // Ensure multiplication between variables and numbers
+        .replace(/(\w)\^(\d+)/g, '$1 ** $2'); // Replace ^ with **
+}
+
+
+    
+        function formatWithSuperscripts(input) {
+            return input.replace(/(\w)\^(\d+)/g, '$1<sup>$2</sup>'); // Replace ^ with <sup>
+        }
+
+        function solvePolynomial(coefficients) {
+    if (coefficients.length === 2) {
+        // Linear equation: ax + b = 0
+        const [a, b] = coefficients;
+        return [-b / a];
+    }
+
+    if (coefficients.length === 3) {
+        // Quadratic equation: ax^2 + bx + c = 0
+        const [a, b, c] = coefficients;
+        const discriminant = b ** 2 - 4 * a * c;
+
+        if (discriminant < 0) return [];
+        if (discriminant === 0) return [-b / (2 * a)];
+
+        return [
+            (-b + Math.sqrt(discriminant)) / (2 * a),
+            (-b - Math.sqrt(discriminant)) / (2 * a),
+        ];
+    }
+
+    return []; // Higher-degree polynomials are not handled here
+}
+
+    
+        function extractCoefficients(expression) {
+    const coefficients = [];
+    // Normalize the expression to handle spaces and ensure consistent formatting
+    expression = expression.replace(/\s+/g, ''); // Remove all spaces
+
+    // Match terms in the format of 'ax**b', 'ax', 'a', or 'x**b', 'x', etc.
+    const terms = expression.match(/([-+]?\d*\.?\d*x?\*\*\d+|[-+]?\d*\.?\d*x|[-+]?\d*\.?\d+)/g);
+
+    if (terms) {
+        terms.forEach(term => {
+            const match = term.match(/([-+]?\d*\.?\d*)x?\*\*(\d+)|([-+]?\d*\.?\d*)x|([-+]?\d*\.?\d+)/);
+
+            if (match) {
+                let coefficient, exponent;
+
+                // Check for the case of 'ax**b'
+                if (match[1] !== undefined) {
+                    coefficient = match[1] === '' || match[1] === '+' ? 1 : (match[1] === '-' ? -1 : parseFloat(match[1]));
+                    exponent = parseInt(match[2]);
+                }
+                // Check for the case of 'ax'
+                else if (match[3] !== undefined) {
+                    coefficient = match[3] === '' || match[3] === '+' ? 1 : (match[3] === '-' ? -1 : parseFloat(match[3]));
+                    exponent = 1;
+                }
+                // Check for the case of a constant 'a'
+                else if (match[4] !== undefined) {
+                    coefficient = parseFloat(match[4]);
+                    exponent = 0;
+                }
+
+                // Ensure the coefficients array is large enough to hold this exponent
+                while (coefficients.length <= exponent) {
+                    coefficients.push(0); // Fill with zeros for missing exponents
+                }
+
+                // Add the coefficient to the correct exponent index
+                coefficients[exponent] += coefficient;
+            }
+        });
+    }
+
+    return coefficients.reverse(); // Return coefficients in order of increasing exponent
+}
+
+
+
+    
+        function plotGraph() {
+            const numeratorRaw = document.getElementById('numerator').value;
+            const denominatorRaw = document.getElementById('denominator').value;
+
+    
+            const numerator = normalizeInput(numeratorRaw);
+            const denominator = normalizeInput(denominatorRaw);
+    
+            const xValues = [];
+            const yValues = [];
+            const xMin = -50;
+            const xMax = 50;
+            const step = 0.1;
+    
+            for (let x = xMin; x <= xMax; x += step) {
+                try {
+                    const f = new Function('x', `return (${numerator}) / (${denominator})`);
+                    const denominatorValue = new Function('x', `return ${denominator}`)(x);
+    
+                    if (Math.abs(denominatorValue) > 0.001) {
+                        const y = f(x);
+                        if (isFinite(y)) {
+                            xValues.push(x);
+                            yValues.push(y);
+                        }
+                    } else {
+                        xValues.push(x - 0.001, x + 0.001);
+                        yValues.push(Infinity, -Infinity);
+                    }
+                } catch (error) {
+                    console.error("Error evaluating the function: ", error);
+                }
+            }
+    
+            const trace = {
+                x: xValues,
+                y: yValues,
+                mode: 'lines',
+                type: 'scatter',
+                line: { color: 'blue' },
+            };
+    
+            const layout = {
+                title: 'Interactive Graph of Rational Function',
+                xaxis: { title: 'x' },
+                yaxis: { title: 'f(x)' },
+                hovermode: 'closest',
+            };
+    
+            const data = [trace];
+    
+            Plotly.newPlot('graph', data, layout);
+    
+            // Trigger step-by-step solution and real-life usage display
+            const steps = generateNumericalSteps(numeratorRaw, denominatorRaw);
+            displayStepByStep(steps);
+            const usage = generateRealLifeUsage();
+            displayRealLifeUsage(usage);
+        }
+    
+        function generateNumericalSteps(numerator, denominator) {
+        const steps = [];
+
+        // Step 1: Normalize expressions
+        steps.push("**Step 1: Normalize the Expression**");
+        steps.push(`Numerator: ${formatWithSuperscripts(numerator)}`);
+        steps.push(`Denominator: ${formatWithSuperscripts(denominator)}`);
+
+        // Step 2: Find x-intercepts (roots of numerator)
+steps.push("**Step 2: Find x-intercepts (roots of numerator):**");
+const numeratorRoots = solvePolynomial(extractCoefficients(normalizeInput(numerator)));
+if (numeratorRoots.length) {
+    const rootsString = numeratorRoots.map(root => `x = ${root.toFixed(2)}`).join(", ");
+    steps.push(`   ${rootsString}`);
+} else {
+    steps.push("   No x-intercepts.");
+}
+
+// Step 3: Find vertical asymptotes (roots of denominator)
+steps.push("**Step 3: Find vertical asymptotes (roots of denominator):**");
+const denominatorRoots = solvePolynomial(extractCoefficients(normalizeInput(denominator)));
+if (denominatorRoots.length) {
+    const rootsString = denominatorRoots.map(root => `x = ${root.toFixed(2)}`).join(", ");
+    steps.push(`   ${rootsString}`);
+} else {
+    steps.push("   No vertical asymptotes.");
+}
+        // Step 4: Horizontal/slant asymptotes
+        steps.push("**Step 4: Horizontal/Slant Asymptote:**");
+        const numeratorDegree = extractCoefficients(normalizeInput(numerator)).length - 1;
+        const denominatorDegree = extractCoefficients(normalizeInput(denominator)).length - 1;
+
+        if (numeratorDegree < denominatorDegree) {
+            steps.push("   Horizontal asymptote at y = 0 ");
+        } else if (numeratorDegree === denominatorDegree) {
+            const horizontalAsymptote = calculateHorizontalAsymptote(numerator, denominator);
+            steps.push(`   Horizontal asymptote at y = ${horizontalAsymptote}.`);
+        } else {
+            steps.push("   Slant asymptote: Perform polynomial long division.");
+        }
+
+       // Step 5: Test points for graphing
+steps.push("**Step 5: Test points for graphing:**");
+[-2, 0, 2].forEach(x => {
+    try {
+        const y = evaluateExpression(numerator, denominator, x);
+        steps.push(`   f(${x}) = ${y.toFixed(2)}`);
+    } catch (error) {
+        steps.push(`   f(${x}) is undefined: ${error.message}`);
+    }
+});
+
+return steps;
+    }
+    
+    function calculateHorizontalAsymptote(numerator, denominator) {
+            const numCoeffs = extractCoefficients(normalizeInput(numerator)).reverse();
+            const denCoeffs = extractCoefficients(normalizeInput(denominator)).reverse();
+
+            if (numCoeffs.length > denCoeffs.length) return "No horizontal asymptote";
+            if (numCoeffs.length < denCoeffs.length) return 0;
+
+            const numLeading = numCoeffs[numCoeffs.length - 1];
+            const denLeading = denCoeffs[denCoeffs.length - 1];
+            return numLeading / denLeading;
+        }
+    
+        function evaluateExpression(numerator, denominator, x) {
+    const numFn = new Function("x", `return ${normalizeInput(numerator)}`);
+    const denFn = new Function("x", `return ${normalizeInput(denominator)}`);
+    
+    const denValue = denFn(x);
+    
+    if (denValue === 0) {
+        throw new Error("Denominator is zero, function is undefined.");
+    }
+    
+    return numFn(x) / denValue;
+}
+    
+        function displayStepByStep(steps) {
+            const factoringStep = document.getElementById("factoringStep");
+            factoringStep.innerHTML = steps.join("<br>");
+        }
+    
+        function generateRealLifeUsage() {
+            return "Rational functions are widely used in real life, including physics (rates of motion), biology (population models), and economics (cost-benefit analyses).";
+        }
+    
+        function displayRealLifeUsage(usage) {
+            const usageDescription = document.getElementById("usageDescription");
+            usageDescription.textContent = usage;
+        }
+
+        plotGraph();
+    </script>
+    
+    
+    
+</body>
+</html>

@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quizzes</title>
+    <link rel="stylesheet" href="css/quizzes.css">
+</head>
+<body>
+
+    <!-- Header -->
+    <header>
+        <div class="header-container">
+            <img src="images/logo.jpg" alt="Logo" class="logo">
+            <span>Rational Function Hub</span>
+            <img src="images/logo.jpg" alt="Logo" class="logo">
+        </div>
+    </header>
+
+    <!-- Navigation bar -->
+    <nav>
+        <ul>
+            <li><a href="firstPage.html">Home</a></li>
+            <li><a href="secondPage.html">Concepts</a></li>
+            <li><a href="thirdPage.html">Graphing</a></li>
+            <li><a href="fourthPage.html" class="active">Practice</a></li>
+            <li><a href="fifthPage.html">Resources</a></li>
+            <li><a href="sixthPage.html">About</a></li>
+            <li><a href="seventhPage.html">Contact</a></li>
+        </ul>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="content">
+        <main>
+            <div class="section">
+            <!-- Title Section -->
+              <div class="title-container">
+                <h1>Quizzes</h1>
+              </div>
+
+            <!-- Questionnaire Section -->
+              <div class="quiz-container">
+                <div id="quiz">
+                    <!-- Quiz questions will be dynamically injected here -->
+                </div>
+              </div>
+
+            <!-- Submit Button Section -->
+              <div class="button-container">
+                <button id="submit">Submit</button>
+              </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="social-media">
+                <div class="social-item">
+                    <a href="https://www.facebook.com/profile.php?id=61570026398234" target="_blank">
+                        <img src="images/facebookIcon.jpg" alt="Facebook">
+                    </a>
+                    <a href="https://www.facebook.com/profile.php?id=61570026398234" target="_blank" class="social-link">Rational Function Hub</a>
+                </div>
+                <div class="social-item">
+                    <a href="https://www.youtube.com/channel/UCffQ2qR7cDcPf9IzZFQeyAQ" target="_blank">
+                        <img src="images/youtubeIcon.jpg" alt="YouTube">
+                    </a>
+                    <a href="https://www.youtube.com/channel/UCffQ2qR7cDcPf9IzZFQeyAQ" target="_blank" class="social-link">Rational_FH_111</a>
+                </div>
+                <div class="social-item">
+                    <a href="https://www.instagram.com/rationalfh111/" target="_blank">
+                        <img src="images/instagramIcon.jpg" alt="Instagram">
+                    </a>
+                    <a href="https://www.instagram.com/rationalfh111/" target="_blank" class="social-link">rationalfh111</a>
+                </div>
+                <div class="social-item">
+                    <a href="https://x.com/RationalFH111" target="_blank">
+                        <img src="images/xIcon.jpg" alt="X">
+                    </a>
+                    <a href="https://x.com/RationalFH111" target="_blank" class="social-link">RationalFH111</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Pool of questions
+        const questions = [
+    {
+        question: "What is the domain of the rational function f(x) = 3 / (x^2 - 4)?",
+        options: ["x ≠ 2", "x ≠ ±2", "x < -2", "All real numbers"],
+        correct: 1,
+    },
+    {
+        question: "Which of the following represents the vertical asymptote of the function f(x) = 5 / (x - 3)?",
+        options: ["x = -3", "x = 0", "x ≠ 3", "x = 3"],
+        correct: 3,
+    },
+    {
+        question: "What is the horizontal asymptote of the rational function f(x) = (2x + 1) / (x - 4)?",
+        options: ["y = -4", "y = 1", "y = 2", "y = 0"],
+        correct: 2,
+    },
+    {
+        question: "The rational function f(x) = 1 / (x + 5) has a hole at which point?",
+        options: ["x = -5", "No holes", "x = 5", "x ≠ -5"],
+        correct: 1,
+    },
+    {
+        question: "What is the oblique asymptote of f(x) = (x^2 + 3x + 2) / (x + 1)?",
+        options: ["y = x + 2", "None", "y = x - 1", "y = x + 1"],
+        correct: 3,
+    },
+    {
+        question: "The graph of f(x) = 4 / (x^2 - 9) has vertical asymptotes at:",
+        options: ["x = -3", "x = 3", "x = ±3", "None"],
+        correct: 2,
+    },
+    {
+        question: "If f(x) = 1 / x, what happens to the graph of f(x) when x approaches 0 from the right?",
+        options: ["It approaches zero", "It remains constant", "It approaches negative infinity", "It approaches positive infinity"],
+        correct: 3,
+    },
+    {
+        question: "What is the range of the function f(x) = 2 / (x - 1)?",
+        options: ["y > 0", "All real numbers", "y < 0", "y ≠ 0"],
+        correct: 3,
+    },
+    {
+        question: "What is the end behavior of f(x) = (3x^2 + 2) / (x^2 - 1)?",
+        options: ["y → ±∞ as x → ±∞", "y → 0 as x → ±∞", "y → 1 as x → ±∞", "y → 3 as x → ±∞"],
+        correct: 3,
+    },
+    {
+        question: "For the function f(x) = (x^2 - 1) / (x - 1), what is the simplified form?",
+        options: ["f(x) = x - 1", "f(x) = x - 1, x ≠ -1", "f(x) = x + 1", "f(x) = x + 1, x ≠ 1"],
+        correct: 3,
+    },
+    {
+        question: "What type of discontinuity does the function f(x) = (x^2 - 4) / (x - 2) have at x = 2?",
+        options: ["Infinite", "None", "Removable", "Jump"],
+        correct: 2,
+    },
+    {
+        question: "What is the y-intercept of the function f(x) = 2 / (x + 3)?",
+        options: ["y = -2/3", "y = 0", "y = 2", "y = 2/3"],
+        correct: 3,
+    },
+    {
+        question: "Which value of x is NOT in the domain of f(x) = (x + 4) / (x^2 - 16)?",
+        options: ["x = -4", "x = 4", "All x are valid", "x = ±4"],
+        correct: 3,
+    },
+    {
+        question: "Which statement is true about the function f(x) = 1 / (x + 1)?",
+        options: ["Its horizontal asymptote is y = 1", "It has no horizontal asymptote", "It has no vertical asymptotes", "It has a vertical asymptote at x = -1"],
+        correct: 3,
+    },
+    {
+        question: "For the rational function f(x) = (x - 1) / (x^2 - 1), what is the x-intercept?",
+        options: ["None", "x = 1", "x = -1", "x = 0"],
+        correct: 1,
+    }
+];
+
+
+        // Function to get random questions
+        const getRandomQuestions = (pool, count) => {
+            const shuffled = pool.sort(() => 0.5 - Math.random());
+            return shuffled.slice(0, count);
+        };
+
+        // Render quiz
+        const selectedQuestions = getRandomQuestions(questions, 3);
+        const quizContainer = document.getElementById("quiz");
+
+        selectedQuestions.forEach((q, index) => {
+            const questionDiv = document.createElement("div");
+            questionDiv.classList.add("question");
+            questionDiv.innerHTML = `
+                <h3>${q.question}</h3>
+                ${q.options
+                    .map(
+                        (option, i) =>
+                            `<label><input type="radio" name="q${index}" value="${i}"> ${option}</label><br>`
+                    )
+                    .join("")}
+            `;
+            quizContainer.appendChild(questionDiv);
+        });
+
+        // Handle submission
+        document.getElementById("submit").addEventListener("click", () => {
+            // Check if all questions have an answer selected
+            let allAnswered = true;
+            selectedQuestions.forEach((q, index) => {
+                const selected = document.querySelector(
+                    `input[name="q${index}"]:checked`
+                );
+                if (!selected) {
+                    allAnswered = false;
+                }
+            });
+
+            // If not all questions are answered, show an alert and return
+            if (!allAnswered) {
+                alert("Please answer all the questions before submitting.");
+                return;
+            }
+
+            // Calculate the score if all questions are answered
+            let score = 0;
+            selectedQuestions.forEach((q, index) => {
+                const selected = document.querySelector(
+                    `input[name="q${index}"]:checked`
+                );
+                if (parseInt(selected.value) === q.correct) {
+                    score++;
+                }
+            });
+
+            // Merge all sections into one and display the score
+            const content = document.querySelector(".content");
+            content.innerHTML = `<div class="result-section">You scored ${score} out of ${selectedQuestions.length}.</div>`;
+        });
+    </script>
+</body>
+</html>

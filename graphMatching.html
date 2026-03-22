@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Graph Matching</title>
+    <link rel="stylesheet" href="css/graphMatching.css">
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="header-container">
+            <img src="images/logo.jpg" alt="Logo" class="logo">
+            <span>Rational Function Hub</span>
+            <img src="images/logo.jpg" alt="Logo" class="logo">
+        </div>
+    </header>
+
+    <!-- Navigation bar -->
+    <nav>
+        <ul>
+            <li><a href="firstPage.html">Home</a></li>
+            <li><a href="secondPage.html">Concepts</a></li>
+            <li><a href="thirdPage.html">Graphing</a></li>
+            <li><a href="fourthPage.html" class="active">Practice</a></li>
+            <li><a href="fifthPage.html">Resources</a></li>
+            <li><a href="sixthPage.html">About</a></li>
+            <li><a href="seventhPage.html">Contact</a></li>
+        </ul>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="content">
+        <main>
+            <div class="section">
+                <div class="title-container">
+                    <h1>Graph Matching</h1>
+                </div>
+                <!-- Graph Section -->
+                <div class="graph-container">
+                    <div id="graphs">
+                        <!-- Graphs dynamically added here -->
+                    </div>
+                </div>
+
+                <!-- Choices Section -->
+                <div class="choices-container">
+                    <div id="choices">
+                        <!-- Choices dynamically added here -->
+                    </div>
+                </div>
+
+                <!-- Submit Button -->
+                <div class="submit-container">
+                    <button id="submit-btn">Submit</button>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="social-media">
+                <div class="social-item">
+                    <a href="https://www.facebook.com/profile.php?id=61570026398234" target="_blank">
+                        <img src="images/facebookIcon.jpg" alt="Facebook">
+                    </a>
+                    <a href="https://www.facebook.com/profile.php?id=61570026398234" target="_blank" class="social-link">Rational Function Hub</a>
+                </div>
+                <div class="social-item">
+                    <a href="https://www.youtube.com/channel/UCffQ2qR7cDcPf9IzZFQeyAQ" target="_blank">
+                        <img src="images/youtubeIcon.jpg" alt="YouTube">
+                    </a>
+                    <a href="https://www.youtube.com/channel/UCffQ2qR7cDcPf9IzZFQeyAQ" target="_blank" class="social-link">Rational_FH_111</a>
+                </div>
+                <div class="social-item">
+                    <a href="https://www.instagram.com/rationalfh111/" target="_blank">
+                        <img src="images/instagramIcon.jpg" alt="Instagram">
+                    </a>
+                    <a href="https://www.instagram.com/rationalfh111/" target="_blank" class="social-link">rationalfh111</a>
+                </div>
+                <div class="social-item">
+                    <a href="https://x.com/RationalFH111" target="_blank">
+                        <img src="images/xIcon.jpg" alt="X">
+                    </a>
+                    <a href="https://x.com/RationalFH111" target="_blank" class="social-link">RationalFH111</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        const graphData = [
+            { image: "images/graph1.png", function: "f(x) = 1 / (x + 2)" },
+            { image: "images/graph2.png", function: "f(x) = (x - 1) / (x^2 - 4)" },
+            { image: "images/graph3.png", function: "f(x) = (2x^2) / (x^2 + 1)" },
+            { image: "images/graph4.png", function: "f(x) = 1 / x" },
+            { image: "images/graph5.png", function: "f(x) = (x + 3) / (x^2 - 9)" },
+            { image: "images/graph6.png", function: "f(x) = 1 / (x - 5)" },
+            { image: "images/graph7.png", function: "f(x) = (x - 3) / (x + 3)" },
+            { image: "images/graph8.png", function: "f(x) = (3x^2 - x + 2) / (x^2 + 4)" },
+            { image: "images/graph9.png", function: "f(x) = (x^2 - 1) / (x + 1)" },
+            { image: "images/graph10.png", function: "f(x) = (x^2 + 2x + 1) / (x^2 - 3x + 2)" },
+        ];
+
+        const formatFunction = (func) => func.replace(/\^(\d+)/g, "<sup>$1</sup>");
+
+        const getRandomItems = (arr, count) => {
+            const shuffled = arr.sort(() => 0.5 - Math.random());
+            return shuffled.slice(0, count);
+        };
+
+        const selectedGraphs = getRandomItems(graphData, 5);
+        const selectedFunctions = getRandomItems(graphData, 10);
+
+        const graphContainer = document.getElementById("graphs");
+        selectedGraphs.forEach((graph, index) => {
+            const graphDiv = document.createElement("div");
+            graphDiv.classList.add("graph-item");
+            graphDiv.setAttribute("id", `graph${index + 1}`);
+            graphDiv.innerHTML = `   
+                <img src="${graph.image}" alt="Graph ${index + 1}">
+                <div class="drop-box" id="drop-box-${index + 1}" ondrop="drop(event)" ondragover="allowDrop(event)">
+                    Drop function here
+                </div>
+            `;
+            graphContainer.appendChild(graphDiv);
+        });
+
+        const choicesContainer = document.getElementById("choices");
+        selectedFunctions.forEach((func, index) => {
+            const choiceDiv = document.createElement("div");
+            choiceDiv.classList.add("choice-item");
+            choiceDiv.setAttribute("id", `choice${index + 1}`);
+            choiceDiv.setAttribute("draggable", "true");
+            choiceDiv.setAttribute("ondragstart", "drag(event)");
+            choiceDiv.innerHTML = `<p>${formatFunction(func.function)}</p>`;
+            choicesContainer.appendChild(choiceDiv);
+        });
+
+        function drag(ev) {
+            ev.dataTransfer.setData("text", ev.target.id);
+            ev.target.style.cursor = "grabbing"; // This sets the cursor to grabbing when dragging
+        }
+
+        function allowDrop(ev) {
+            ev.preventDefault();
+            ev.target.style.cursor = "pointer"; // This sets the cursor to a pointer when hovering over the drop box
+        }
+
+        function drop(ev) {
+            ev.preventDefault();
+            const data = ev.dataTransfer.getData("text");
+            const draggedElement = document.getElementById(data);
+            const dropBox = ev.target;
+
+            if (!dropBox.querySelector('.choice-item')) {
+                dropBox.textContent = '';  // Clear previous content if any
+                dropBox.appendChild(draggedElement);
+
+                draggedElement.style.fontSize = "18px";
+                draggedElement.style.border = "none";
+                draggedElement.style.width = "100%";
+                draggedElement.style.height = "100%";
+                draggedElement.style.margin = "0px";
+                draggedElement.style.padding = "10px";
+                draggedElement.style.boxSizing = "border-box";
+                draggedElement.style.textAlign = "center";
+                draggedElement.style.display = "flex";
+                draggedElement.style.alignItems = "center";
+                draggedElement.style.justifyContent = "center";
+                draggedElement.style.backgroundColor = "transparent"; 
+                draggedElement.setAttribute("draggable", "true");  // Disable further dragging
+                dropBox.style.pointerEvents = "none";  // Disable drop for this box
+            } else {
+                alert("This drop box can only hold one function!");
+            }
+        }
+
+        // Function to check if all dropboxes are filled
+        function checkIfAllFilled() {
+            let allFilled = true;
+
+            selectedGraphs.forEach((graph, index) => {
+                const dropBox = document.getElementById(`drop-box-${index + 1}`);
+                if (!dropBox.querySelector('.choice-item')) {
+                    allFilled = false;
+                }
+            });
+
+            return allFilled;
+        }
+
+        document.getElementById("submit-btn").addEventListener("click", function () {
+            // Check if all dropboxes are filled
+            if (!checkIfAllFilled()) {
+                alert("Please fill all the dropboxes before submitting.");
+                return; // Prevent submission if not all dropboxes are filled
+            }
+
+            let correctMatches = 0;
+
+            selectedGraphs.forEach((graph, index) => {
+                const dropBox = document.getElementById(`drop-box-${index + 1}`);
+                const placedChoice = dropBox.querySelector('.choice-item');
+
+                if (placedChoice && placedChoice.innerText.trim() === graph.function) {
+                    correctMatches++;
+                }
+            });
+
+            const contentDiv = document.querySelector('.content');
+            contentDiv.innerHTML = `
+                <div class="score-screen">
+                    <p>You got ${correctMatches} out of ${selectedGraphs.length} correct!</p>
+                </div>
+            `;
+        });
+
+        function restartGame() {
+            location.reload();
+        }
+    </script>
+</body>
+</html>
